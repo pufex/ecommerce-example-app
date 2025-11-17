@@ -1,6 +1,7 @@
 import userModel from "../models/userModel.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
+import transporter from "../config/mailTransporter.js"
 
 export const register = async (req, res) => {
     const {name, email, password} = req.body;
@@ -21,8 +22,17 @@ export const register = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10)
         await userModel.create({name, email, password: hashedPassword})
+
+        await transporter.sendMail({
+            from: process.env.BREVO_EMAIL,
+            to: email,
+            subject: "Welcome to ecommmerce example app!",
+            text: "Thank you for creating an account on my website.", // plain‑text body
+        });
+
         res.send("User successfully created.")
     }catch(err){
+        console.log(err)
         res.status(500)
         return res.json({error: true, message: "Internal Server Error"})
     }
