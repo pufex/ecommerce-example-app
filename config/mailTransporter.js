@@ -1,13 +1,15 @@
 import nodemailer from "nodemailer"
+import dotenv from "dotenv"
 
-const transport = nodemailer.createTransport({
-  host: "smtp.ethereal.email",
+dotenv.config()
+
+const transporter = nodemailer.createTransport({
+  host: "smtp-relay.brevo.com",
   port: 587,
-  secure: false, // true for 465, false for other ports
   auth: {
-    user: "maddison53@ethereal.email",
-    pass: "jn7jnAPss4f63QBp6D",
-  },
+    user: process.env.BREVO_LOGIN,
+    pass: process.env.BREVO_PASSWORD,
+  }
 })
 
-export default transport
+export default transporter
