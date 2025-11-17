@@ -4,8 +4,8 @@ import cors from "cors"
 import cookieParser from "cookie-parser"
 import morgan from "morgan"
 import dotenv from "dotenv"
-import authRouter from "./routers/authRouter"
-
+import authRouter from "./routers/authRouter.js"
+import bodyParser from "body-parser"
 
 dotenv.config()
 
@@ -13,14 +13,17 @@ const app = express()
 
 app.use(cors({ credentials: true }))
 app.use(cookieParser())
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
 app.use(morgan("dev"))
+app.use(express.urlencoded({extended: true}))
+app.use(express.json())
+app.use(bodyParser.json())
 
 app.use("/auth", authRouter)
 
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
         console.log("Connected to the database.")
-        app.listen(3001, () => console.log("Listening for requests on port 3001"))
+        app.listen(3001, () => {
+            console.log("Listening for requests on port 3001")
+        })
     })
