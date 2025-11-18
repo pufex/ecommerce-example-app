@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken"
-import userModel from "../models/userModel"
+import userModel from "../models/userModel.js"
 
 const verifyJWT = async (req, res, next) => {
     const authHeader = req.headers
@@ -31,6 +31,7 @@ const verifyJWT = async (req, res, next) => {
                 name: user.username,
                 email: user.email,
                 verifiedEmail: user.emailVerified,
+                isAdmin: user.isAdmin,
             }
 
             req.user = payloadObject;
