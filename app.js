@@ -6,12 +6,15 @@ import morgan from "morgan"
 import dotenv from "dotenv"
 import authRouter from "./routers/authRouter.js"
 import bodyParser from "body-parser"
+import credentials from "./middleware/credentials.js"
+import {corsOptions} from "./config/corsOptions.js"
 
 dotenv.config()
 
 const app = express()
 
-app.use(cors({ credentials: true }))
+app.use(credentials)
+app.use(cors(corsOptions))
 app.use(cookieParser())
 app.use(morgan("dev"))
 app.use(express.urlencoded({extended: true}))
