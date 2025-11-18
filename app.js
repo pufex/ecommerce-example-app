@@ -9,6 +9,8 @@ import adminRouter from "./routers/admin/adminRouter.js"
 import bodyParser from "body-parser"
 import credentials from "./middleware/credentials.js"
 import {corsOptions} from "./config/corsOptions.js"
+import verifyJWT from "./middleware/verifyJWT.js"
+import { verifyAdmin } from "./middleware/verifyAdmin.js"
 
 dotenv.config()
 
@@ -23,7 +25,7 @@ app.use(express.json())
 app.use(bodyParser.json())
 
 app.use("/auth", authRouter)
-app.use("/admin", adminRouter)
+app.use("/admin", verifyJWT, verifyAdmin, adminRouter)
 
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
