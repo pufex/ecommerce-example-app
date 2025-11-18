@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser"
 import morgan from "morgan"
 import dotenv from "dotenv"
 import authRouter from "./routers/authRouter.js"
+import adminRouter from "./routers/admin/adminRouter.js"
 import bodyParser from "body-parser"
 import credentials from "./middleware/credentials.js"
 import {corsOptions} from "./config/corsOptions.js"
@@ -22,6 +23,7 @@ app.use(express.json())
 app.use(bodyParser.json())
 
 app.use("/auth", authRouter)
+app.use("/admin", adminRouter)
 
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
