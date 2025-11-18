@@ -31,6 +31,7 @@ const verifyJWT = async (req, res, next) => {
                 name: user.username,
                 email: user.email,
                 verifiedEmail: user.emailVerified,
+                isAdmin: user.isAdmin,
             }
 
             req.user = payloadObject;

@@ -12,7 +12,7 @@ export const getProducts = async (req, res) => {
 
 export const getProduct = async (req, res) => {
     try{
-        const product_id = req.params.product_id
+        const product_id = req.params.id
         const product = await productModel.findById(product_id)
         res.json(product)
     }catch(err){
