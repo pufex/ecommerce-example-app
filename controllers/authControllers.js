@@ -2,16 +2,16 @@ import userModel from "../models/userModel.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import transporter from "../config/mailTransporter.js"
+import { loginSchema, registerSchema } from "../config/zodSchemas.js"
 
 export const register = async (req, res) => {
-    const {name, email, password} = req.body;
-    if(!name || !email || !password){
-        res.status(400)
-        return res.json({
-            error: true,
-            message: "Invalid request body"
-        })
+    
+    const result = registerSchema.safeParse(req.body)
+    if(!result.success){
+        return res.sendStatus(400)
     }
+
+    const {name, email, password} = result.data;
 
     try{
         const existingUser = await userModel.findOne({email})
@@ -39,14 +39,12 @@ export const register = async (req, res) => {
 }
 
 export const login = async (req, res) => {
-    const {email, password} = req.body;
-    if(!email || !password){
-        res.status(400)
-        return res.json({
-            error: true,
-            message: "Invalid request body"
-        })
+    
+    const result = registerSchema.safeParse(req.body)
+    if(!result.success){
+        return res.sendStatus(500)
     }
+    const {email, password} = result.data
 
     try{
         const user = await userModel.findOne({email})
