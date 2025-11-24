@@ -6,9 +6,13 @@ export const saveAddressDetails = async (req, res) => {
     if(!result.success){
         return res.sendStatus(400)
     }
-
     const {data} = result 
 
-    await userModel.findByIdAndUpdate(req.user._id, {addressDetails: data});
-    res.sendStatus(200)
+    try{
+        await userModel.findByIdAndUpdate(req.user._id, {addressDetails: data});
+        res.sendStatus(200)
+    }catch(err){
+        console.log(err)
+        res.sendStatus(500)
+    }
 }
