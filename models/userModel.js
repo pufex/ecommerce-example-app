@@ -22,13 +22,39 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    emailVerificationOTP: {
-        type: String,
-        default: "",
-    },
-    emailVerificationExpiresAt: {
-        type: Date,
-        default: 0
+    orderDetails: {
+        emailAddress: {
+            type: String,
+            default: null,
+        },
+        phoneNumber: {
+            type: String,
+            default: null,
+        },
+        country: {
+            type: String,
+            default: null,
+        },
+        state: {
+            type: String,
+            default: null,
+        },
+        city: {
+            type: String,
+            default: null,
+        },
+        street: {
+            type: String,
+            default: null,
+        },
+        houseNumber: {
+            type: String,
+            default: null,
+        },
+        roomNumber: {
+            type: String,
+            default: null,
+        }
     }
 }, { timestamps: true })
 
