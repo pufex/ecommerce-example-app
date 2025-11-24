@@ -12,6 +12,7 @@ import {corsOptions} from "./config/corsOptions.js"
 import verifyJWT from "./middleware/verifyJWT.js"
 import { verifyAdmin } from "./middleware/verifyAdmin.js"
 import productsRouter from "./routers/productsRouter.js"
+import userRouter from "./routers/userRouter.js"
 
 dotenv.config()
 
@@ -27,6 +28,7 @@ app.use(bodyParser.json())
 
 app.use("/auth", authRouter)
 app.use("/products", productsRouter)
+app.use("/users", userRouter)
 app.use("/admin", verifyJWT, verifyAdmin, adminRouter)
 
 mongoose.connect(process.env.MONGODB_URI)
