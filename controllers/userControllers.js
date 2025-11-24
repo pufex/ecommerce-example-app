@@ -9,6 +9,6 @@ export const saveAddressDetails = async (req, res) => {
 
     const {data} = result 
 
-    await userModel.findByIdAndUpdate(req.user._id, data);
+    await userModel.findByIdAndUpdate(req.user._id, {addressDetails: data});
     res.sendStatus(200)
 }
