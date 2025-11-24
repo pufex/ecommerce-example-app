@@ -40,7 +40,7 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
     
-    const result = registerSchema.safeParse(req.body)
+    const result = loginSchema.safeParse(req.body)
     if(!result.success){
         return res.sendStatus(400)
     }
