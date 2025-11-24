@@ -31,6 +31,14 @@ const userSchema = new mongoose.Schema({
             type: String,
             default: null,
         },
+        name: {
+            type: String,
+            default: null,
+        },
+        surname: {
+          type: String,
+          default: null,  
+        },
         country: {
             type: String,
             default: null,
@@ -40,6 +48,10 @@ const userSchema = new mongoose.Schema({
             default: null,
         },
         city: {
+            type: String,
+            default: null,
+        },
+        zipCode: {
             type: String,
             default: null,
         },
