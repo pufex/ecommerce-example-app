@@ -26,15 +26,7 @@ const verifyJWT = async (req, res, next) => {
                 return res.json({error: true, message: "Forbidden"})        
             }
 
-            const payloadObject = {
-                _id: user._id,
-                name: user.username,
-                email: user.email,
-                verifiedEmail: user.emailVerified,
-                isAdmin: user.isAdmin,
-            }
-
-            req.user = payloadObject;
+            req.user = user;
             next()
         }
     )
